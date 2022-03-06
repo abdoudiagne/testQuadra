@@ -13,7 +13,7 @@ Build Angular 13 Token based Authentication & Authorization Application with Web
 
 # Quickstart
 
-Clone the Project `git clone https://github.com/akd-agiltoo/test-quadra-angular.git`
+Clone the Project `git clone https://github.com/abdoudiagne/testQuadra.git`
 
 Start `npm install`
 
@@ -23,11 +23,11 @@ Run `ng serve --port 8081` for a dev server. Navigate to `http://localhost:8081/
 For JWT – Token based Authentication with Web API, we’re gonna call endpoints:
 - POST {{BASE_URL}}{{BASE_API}}{{BASE_AUTH}}+`/login` for User Login
 
-BASE_URL: https://test1.quadra-informatique.fr
-BASE_API : /api
-BASE_AUTH: /auth
-BASE_CRUD_TODO: /todo
-user-id: 1
+ BASE_URL: https://test1.quadra-informatique.fr
+ BASE_API : /api
+ BASE_AUTH: /auth
+ BASE_CRUD_TODO: /todo
+ user-id: 1
 
 
 
