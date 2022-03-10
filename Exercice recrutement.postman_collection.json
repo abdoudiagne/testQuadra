@@ -1,0 +1,223 @@
+{
+	"info": {
+		"_postman_id": "f611b89c-df49-4595-bb37-377a2b6d8da4",
+		"name": "Exercice recrutement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody)\r",
+									"postman.setEnvironmentVariable(\"token\", jsonData.token)\r",
+									"postman.setEnvironmentVariable(\"user-id\", jsonData.user.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"test1\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}{{BASE_API}}{{BASE_AUTH}}/login",
+							"host": [
+								"{{BASE_URL}}{{BASE_API}}{{BASE_AUTH}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Todo",
+			"item": [
+				{
+					"name": "Get my todos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "user-id",
+								"value": "{{user-id}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}{{BASE_API}}{{BASE_CRUD_TODO}}/list",
+							"host": [
+								"{{BASE_URL}}{{BASE_API}}{{BASE_CRUD_TODO}}"
+							],
+							"path": [
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = JSON.parse(responseBody)\r",
+									"postman.setEnvironmentVariable(\"todo-id\", jsonData.todo_id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "user-id",
+								"value": "{{user-id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"todo_label\": \"Todo - Create\",\r\n        \"todo_is_done\": 0\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}{{BASE_API}}{{BASE_CRUD_TODO}}",
+							"host": [
+								"{{BASE_URL}}{{BASE_API}}{{BASE_CRUD_TODO}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "user-id",
+								"value": "{{user-id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"todo_id\": {{todo-id}},\r\n        \"todo_label\": \"Todo - Update\",\r\n        \"todo_is_done\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}{{BASE_API}}{{BASE_CRUD_TODO}}",
+							"host": [
+								"{{BASE_URL}}{{BASE_API}}{{BASE_CRUD_TODO}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete todo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "user-id",
+								"value": "{{user-id}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"todo_id\": 1,\r\n        \"todo_label\": \"Todo  1 - Upsdsdate\",\r\n        \"todo_is_done\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}{{BASE_API}}{{BASE_CRUD_TODO}}/{{todo-id}}",
+							"host": [
+								"{{BASE_URL}}{{BASE_API}}{{BASE_CRUD_TODO}}"
+							],
+							"path": [
+								"{{todo-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
